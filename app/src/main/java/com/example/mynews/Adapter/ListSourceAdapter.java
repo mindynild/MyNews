@@ -2,6 +2,7 @@ package com.example.mynews.Adapter;
 
 
 import android.view.ContextMenu;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -53,7 +54,9 @@ public class ListSourceAdapter extends RecyclerView.Adapter<ListSourceViewHolder
     @NonNull
     @Override
     public ListSourceViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View itemView = inflater.inflate(R.layout.source_layout, parent, false);
+        return new ListSourceViewHolder(itemView);
     }
 
     @Override
@@ -63,6 +66,6 @@ public class ListSourceAdapter extends RecyclerView.Adapter<ListSourceViewHolder
 
     @Override
     public int getItemCount() {
-        return 0;
+        return webSite.getSources().size();
     }
 }
