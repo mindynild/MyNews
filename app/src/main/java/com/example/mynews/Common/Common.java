@@ -1,7 +1,6 @@
 package com.example.mynews.Common;
 
 import com.example.mynews.Interface.FaviconFinderService;
-import com.example.mynews.Interface.IconBetterIdeaService;
 import com.example.mynews.Interface.NewsService;
 import com.example.mynews.Model.FaviconFinder;
 import com.example.mynews.Remote.FaviconFinderClient;
