@@ -48,7 +48,7 @@ class ListSourceViewHolder extends RecyclerView.ViewHolder
 
     @Override
     public void onClick(View v) {
-        itemClickListener.onClick(view,getAdapterPosition(),false);
+        itemClickListener.onClick(v,getAdapterPosition(),false);
     }
 }
 public class ListSourceAdapter extends RecyclerView.Adapter<ListSourceViewHolder>{
@@ -75,7 +75,7 @@ public class ListSourceAdapter extends RecyclerView.Adapter<ListSourceViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ListSourceViewHolder holder, int position)
+    public void onBindViewHolder(@NonNull final ListSourceViewHolder holder, int position)
     {
         StringBuilder iconBetterAPI = new StringBuilder("https://besticon-demo.herokuapp.com/allicons.json?url=");
         iconBetterAPI.append(webSite.getSources().get(position).getUrl());
