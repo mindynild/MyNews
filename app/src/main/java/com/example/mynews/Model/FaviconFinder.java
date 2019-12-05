@@ -4,7 +4,7 @@ import android.graphics.drawable.Icon;
 
 import java.util.List;
 
-public class IconBetterIdea {
+public class FaviconFinder {
     private String url;
     private List<Icon> icons;
 
