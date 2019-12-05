@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.os.Bundle;
 import android.widget.LinearLayout;
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     NewsService mService;
     ListSourceAdapter adapter;
     AlertDialog dialog;
+    SwipeRefreshLayout swipeLayout;
 
 
     @Override
@@ -42,6 +44,14 @@ public class MainActivity extends AppCompatActivity {
 
 
         //Init View
+        swipeLayout = (SwipeRefreshLayout)findViewById(R.id.swipeRefresh);
+        swipeLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadWebsiteSource(true);
+            }
+        })
+
         listWebsite = (RecyclerView)
 
                 findViewById(R.id.list_source);
@@ -94,20 +104,31 @@ public class MainActivity extends AppCompatActivity {
         }
         else // If from Swipe to Refresh
         {
-            public void onResponse(Call<WebSite> call, Response<WebSite> response) {
-            adapter = new ListSourceAdapter(getBaseContext(),response.body());
-            adapter.notifyDataSetChanged();
-            listWebsite.setAdapter(adapter);
 
-            //Save to cache
-            Paper.book().write("cache",new Gson().toJson(response.body()));
+            dialog.show();
+            //Fetch new data
+            mService.getSources().enqueue(new Callback<WebSite>() {
+                @Override
+                public void onResponse(Call<WebSite> call, Response<WebSite> response) {
+                    adapter = new ListSourceAdapter(getBaseContext(), response.body());
+                    adapter.notifyDataSetChanged();
+                    listWebsite.setAdapter(adapter);
+
+                    //Save to cache
+                    Paper.book().write("cache", new Gson().toJson(response.body()));
+
+                    //Dissmiss refresh progressing
+                    swipeLayout.setRefreshing(false);
+                }
+
+                @Override
+                public void onFailure(Call<WebSite> call, Throwable t) {
+
+                }
+            });
 
 
+                }
         }
 
-}
-
-
-
-}
 

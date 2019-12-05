@@ -1,6 +1,7 @@
 package com.example.mynews.Adapter;
 
 
+import android.content.Context;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,11 +11,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mynews.Common.Common;
+import com.example.mynews.Interface.FaviconFinderService;
 import com.example.mynews.Interface.ItemClickListener;
+import com.example.mynews.Model.FaviconFinder;
 import com.example.mynews.Model.WebSite;
 import com.example.mynews.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 class ListSourceViewHolder extends RecyclerView.ViewHolder
     implements View.OnClickListener
@@ -46,9 +53,15 @@ public class ListSourceAdapter extends RecyclerView.Adapter<ListSourceViewHolder
     private Context context;
     private WebSite webSite;
 
+    private FaviconFinderService mService;
+
+
     public ListSourceAdapter(Context context, WebSite webSite) {
         this.context = context;
         this.webSite = webSite;
+
+        mService = Common.getIconService();
+
     }
 
     @NonNull
@@ -60,7 +73,23 @@ public class ListSourceAdapter extends RecyclerView.Adapter<ListSourceViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ListSourceViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ListSourceViewHolder holder, int position)
+    {
+        StringBuilder iconBetterAPI = new StringBuilder("https://besticon-demo.herokuapp.com/allicons.json?url=");
+        iconBetterAPI.append(webSite.getSources().get(position).getUrl());
+
+        mService.getIconUrl(iconBetterAPI.toString())
+                .enqueue(new Callback<FaviconFinder>() {
+                    @Override
+                    public void onResponse(Call<FaviconFinder> call, Response<FaviconFinder> response) {
+                        
+                    }
+
+                    @Override
+                    public void onFailure(Call<FaviconFinder> call, Throwable t) {
+
+                    }
+                });
 
     }
 
