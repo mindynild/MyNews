@@ -2,6 +2,7 @@ package com.example.mynews.Adapter;
 
 
 import android.content.Context;
+import android.content.pm.PackageInfo;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.example.mynews.Interface.ItemClickListener;
 import com.example.mynews.Model.FaviconFinder;
 import com.example.mynews.Model.WebSite;
 import com.example.mynews.R;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import retrofit2.Call;
@@ -82,7 +84,15 @@ public class ListSourceAdapter extends RecyclerView.Adapter<ListSourceViewHolder
                 .enqueue(new Callback<FaviconFinder>() {
                     @Override
                     public void onResponse(Call<FaviconFinder> call, Response<FaviconFinder> response) {
-                        
+                        if (response.body().getIcons().size() > 0 )
+                        {
+                            Picasso.with(context)
+                                    .load(response.body().getIcons().get(0).getUrl())
+                                    .into(holder.source_image);
+
+                        }
+
+
                     }
 
                     @Override
@@ -90,6 +100,15 @@ public class ListSourceAdapter extends RecyclerView.Adapter<ListSourceViewHolder
 
                     }
                 });
+
+        holder.source_title.setText(webSite.getSources().get(position).getName());
+
+        holder.setItemClickListener(new ItemClickListener() {
+            @Override
+            public void onClick(View view, int position, boolean isLongClick) {
+                
+            }
+        });
 
     }
 
