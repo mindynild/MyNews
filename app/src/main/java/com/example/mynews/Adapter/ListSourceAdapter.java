@@ -2,6 +2,7 @@ package com.example.mynews.Adapter;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mynews.Common.Common;
 import com.example.mynews.Interface.FaviconFinderService;
 import com.example.mynews.Interface.ItemClickListener;
+import com.example.mynews.ListNews;
 import com.example.mynews.Model.FaviconFinder;
 import com.example.mynews.Model.WebSite;
 import com.example.mynews.R;
@@ -38,6 +40,8 @@ class ListSourceViewHolder extends RecyclerView.ViewHolder
 
         source_image = (CircleImageView)itemView.findViewById(R.id.source_image);
         source_title = (TextView)itemView.findViewById(R.id.source_name);
+
+        itemView.setOnClickListener(this);
 
     }
 
@@ -106,8 +110,10 @@ public class ListSourceAdapter extends RecyclerView.Adapter<ListSourceViewHolder
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position, boolean isLongClick) {
-                //Implement in part 2
-
+                Intent intent = new Intent(context, ListNews.class);
+                intent.putExtra("source", webSite.getSources().get(position).getId());
+                intent.putExtra("sortBy",webSite.getSources().get(position).getSortByAvailable().get(0)); // get default SortBy
+                context.startActivity(intent);
             }
         });
 
