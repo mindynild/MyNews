@@ -10,12 +10,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.mynews.Common.ISO8601Parse;
 import com.example.mynews.Interface.ItemClickListener;
 import com.example.mynews.Model.Article;
 import com.example.mynews.R;
 import com.github.curioustechizen.ago.RelativeTimeTextView;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 
@@ -80,7 +82,14 @@ public class ListNewsAdapter extends RecyclerView.Adapter<ListNewsViewHolder> {
         else
             holder.article_title.setText(articleList.get(position).getTitle());
 
-        Date date = null
+        Date date = null;
+        try{
+            date = ISO8601Parse.parse(articleList.get(position).getPublishedAt());
+        }catch (ParseException ex)
+        {
+            ex.printStackTrace();
+        }
+        holder.article_time.setReferenceTime(date.getTime());
 
     }
 
