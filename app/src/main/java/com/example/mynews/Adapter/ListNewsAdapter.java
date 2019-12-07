@@ -81,7 +81,7 @@ public class ListNewsAdapter extends RecyclerView.Adapter<ListNewsViewHolder> {
             holder.article_title.setText(articleList.get(position).getTitle());
 
         Date date = null
-                
+
     }
 
     @Override
