@@ -12,10 +12,17 @@ import android.widget.TextView;
 import com.example.mynews.Adapter.ListNewsAdapter;
 import com.example.mynews.Common.Common;
 import com.example.mynews.Interface.NewsService;
+import com.example.mynews.Model.News;
 import com.flaviofaria.kenburnsview.KenBurnsView;
 import com.github.florent37.diagonallayout.DiagonalLayout;
+import com.squareup.picasso.Picasso;
 
 import dmax.dialog.SpotsDialog;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static java.lang.System.load;
 
 public class ListNews extends AppCompatActivity {
 
@@ -84,7 +91,22 @@ public class ListNews extends AppCompatActivity {
         if (!isRefreshed)
         {
             dialog.show();
-            mService.getNewestArticles()
+            mService.getNewestArticles(Common.getAPIUrl(source, sortBy, Common.API_KEY))
+                    .enqueue(new Callback<News>() {
+                        @Override
+                        public void onResponse(Call<News> call, Response<News> response) {
+                            dialog.dismiss();
+                            Picasso.with(getBaseContext())
+                                    load(response.body().getArticles().get(0).getUrlToImage());
+
+                            top_tittle.setText(response);
+                        }
+
+                        @Override
+                        public void onFailure(Call<News> call, Throwable t) {
+
+                        }
+                    });
 
         }
     }

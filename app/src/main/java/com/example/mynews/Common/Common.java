@@ -33,6 +33,7 @@ public class Common {
                 .append(apiKey)
                 .append("&sources=")
                 .append(source)
+                .toString();
 
     }
 
