@@ -21,5 +21,9 @@ public class Common {
         return FaviconFinderClient.getClient(BASE_URL).create(FaviconFinderService.class);
     }
 
+    //https://newsapi.org/v2/everything?q=apple&from=2019-12-07&to=2019-12-07&sortBy=popularity&apiKey=6bbed62e53d042cb91b21b663a178b2f
+    //lien donné par leprof : https://newsapi.org/v2/everything? apiKey=d31f5fa5f03443dd8a1b9e3fde92ec34&languag e=fr&sources=google-news-fr
+
+
 
 }

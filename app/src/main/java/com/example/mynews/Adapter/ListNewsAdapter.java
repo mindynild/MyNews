@@ -91,6 +91,14 @@ public class ListNewsAdapter extends RecyclerView.Adapter<ListNewsViewHolder> {
         }
         holder.article_time.setReferenceTime(date.getTime());
 
+        //Set Event Click
+        holder.setItemClickListener(new ItemClickListener() {
+            @Override
+            public void onClick(View view, int position, boolean isLongClick) {
+                //Code later
+            }
+        })
+
     }
 
     @Override
