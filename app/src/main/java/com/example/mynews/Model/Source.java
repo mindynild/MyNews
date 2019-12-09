@@ -1,5 +1,7 @@
 package com.example.mynews.Model;
 
+import java.util.List;
+
 public class Source {
     private String id;
     private String name;
@@ -77,6 +79,10 @@ public class Source {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public List getSortByAvailable() {
+        return null;
     }
 }
 

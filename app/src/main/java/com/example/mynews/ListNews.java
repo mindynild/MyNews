@@ -96,10 +96,16 @@ public class ListNews extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<News> call, Response<News> response) {
                             dialog.dismiss();
-                            Picasso.with(getBaseContext())
+
+                            //Get first article
+                            Picasso.with(getBaseContext());
                                     load(response.body().getArticles().get(0).getUrlToImage());
 
-                            top_tittle.setText(response);
+                            top_tittle.setText(response.body().getArticles().get(0).getTitle());
+                            top_author.setText(response.body().getArticles().get(0).getAuthor());
+
+                            webHotUrl = response.body().getArticles().get(0).getUrl();
+
                         }
 
                         @Override

@@ -97,7 +97,7 @@ public class ListNewsAdapter extends RecyclerView.Adapter<ListNewsViewHolder> {
             public void onClick(View view, int position, boolean isLongClick) {
                 //Code later
             }
-        })
+        });
 
     }
 
