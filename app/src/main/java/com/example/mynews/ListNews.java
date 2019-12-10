@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -64,7 +65,9 @@ public class ListNews extends AppCompatActivity {
         diagonalLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //click to hot /latest news to read
+                Intent detail = new Intent (getBaseContext(), DetailArticle.class);
+                detail.putExtra("webURL",webHotUrl);
+                startActivity(detail);
             }
         });
         kbv = (KenBurnsView)findViewById(R.id.top_image);
