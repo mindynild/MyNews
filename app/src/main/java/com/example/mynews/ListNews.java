@@ -99,7 +99,9 @@ public class ListNews extends AppCompatActivity {
 
                             //Get first article
                             Picasso.with(getBaseContext());
-                                    load(response.body().getArticles().get(0).getUrlToImage());
+                                    .load(response.body().getArticles().get(0).getUrlToImage())
+                                    .into(kbv);
+
 
                             top_tittle.setText(response.body().getArticles().get(0).getTitle());
                             top_author.setText(response.body().getArticles().get(0).getAuthor());
