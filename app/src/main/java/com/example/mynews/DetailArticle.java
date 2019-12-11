@@ -13,7 +13,7 @@ import dmax.dialog.SpotsDialog;
 public class DetailArticle extends AppCompatActivity {
 
     WebView webView;
-    AlertDialog dialog;
+    AlertDialog dialog; //correction : AlertDialog instance
 
 
     @Override
@@ -21,7 +21,7 @@ public class DetailArticle extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail_article);
 
-        dialog = new SpotsDialog(this);
+        dialog = new AlertDialog.Builder(this).create(); //correction : add AlertDialog.Builder.creat()
         dialog.show();
         //Webview
         webView = (WebView)findViewById(R.id.webView);

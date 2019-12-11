@@ -2,6 +2,7 @@ package com.example.mynews.Adapter;
 
 import android.app.VoiceInteractor;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mynews.Common.ISO8601Parse;
+import com.example.mynews.DetailArticle;
 import com.example.mynews.Interface.ItemClickListener;
 import com.example.mynews.Model.Article;
 import com.example.mynews.R;
@@ -95,7 +97,9 @@ public class ListNewsAdapter extends RecyclerView.Adapter<ListNewsViewHolder> {
         holder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onClick(View view, int position, boolean isLongClick) {
-                //Code later
+                Intent detail = new Intent (context, DetailArticle.class);
+                detail.putExtra("webURL",articleList.get(position).getUrl());
+                context.startActivity(detail);
             }
         });
 

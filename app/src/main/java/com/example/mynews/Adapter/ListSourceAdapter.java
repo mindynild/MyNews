@@ -4,6 +4,7 @@ package com.example.mynews.Adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
+import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -112,7 +113,7 @@ public class ListSourceAdapter extends RecyclerView.Adapter<ListSourceViewHolder
             public void onClick(View view, int position, boolean isLongClick) {
                 Intent intent = new Intent(context, ListNews.class);
                 intent.putExtra("source", webSite.getSources().get(position).getId());
-                intent.putExtra("sortBy",webSite.getSources().get(position).getSortBysAvailable().get(0)); // get default SortBy
+                intent.putExtra("sortBy", (Bundle) webSite.getSources().get(position).getSortByAvailable().get(0)); // get default SortBy Correction : (Bundle)
                 context.startActivity(intent);
             }
         });

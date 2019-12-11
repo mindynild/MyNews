@@ -10,7 +10,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        
+
+
         <com.github.florent37.diagonallayout.DiagonalLayout
             android:id="@+id/diagonalLayout"
             android:layout_width="match_parent"
@@ -18,6 +19,7 @@
             app:diagonal_angle="5"
             app:diagonal_direction="left"
             app:diagonal_position="bottom">
+
 
             <com.flaviofaria.kenburnsview.KenBurnsView
                 android:id="@+id/top_image"
@@ -66,15 +68,20 @@
 
             </RelativeLayout>
 
+
+
         </com.github.florent37.diagonallayout.DiagonalLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_below="@+id/diagonalLayout"
+            android:id="@+id/listNews"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </androidx.recyclerview.widget.RecyclerView>
 
     </RelativeLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/listNews"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-    </androidx.recyclerview.widget.RecyclerView>
 
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
