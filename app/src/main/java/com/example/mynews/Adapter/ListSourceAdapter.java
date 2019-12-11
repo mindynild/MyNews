@@ -122,6 +122,13 @@ public class ListSourceAdapter extends RecyclerView.Adapter<ListSourceViewHolder
 
     @Override
     public int getItemCount() {
-        return webSite.getSources().size();
+        if (webSite!= null) //correction suite  a fatal exception
+        {
+            return webSite.getSources().size();
+        }
+        else
+        {
+            return (-1);
+        }
     }
 }
