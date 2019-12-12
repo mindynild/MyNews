@@ -113,7 +113,7 @@ public class ListSourceAdapter extends RecyclerView.Adapter<ListSourceViewHolder
             public void onClick(View view, int position, boolean isLongClick) {
                 Intent intent = new Intent(context, ListNews.class);
                 intent.putExtra("source", webSite.getSources().get(position).getId());
-                intent.putExtra("sortBy", (Bundle) webSite.getSources().get(position)); // get default SortBy Correction : (Bundle)
+                intent.putExtra("sortBy", webSite.getSources().get(position)); // get default SortBy Correction : (Bundle)
                 context.startActivity(intent);
             }
         });
