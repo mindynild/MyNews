@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     NewsService mService;
     ListSourceAdapter adapter;
-    AlertDialog.Builder dialog; //correction : ajout de .Builder
+    AlertDialog dialog; //correction : ajout de .Builder
     SwipeRefreshLayout swipeLayout;
 
 
@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
                 LinearLayoutManager(this);
         listWebsite.setLayoutManager(layoutManager);
 
-        dialog = new AlertDialog.Builder(this);//Correction AlerDialog and not SpotsDialog
+        dialog = new AlertDialog.Builder(this).create();//Correction AlerDialog and not SpotsDialog
 
         loadWebsiteSource(false);
     }
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
     private void loadWebsiteSource(boolean isRefreshed) {
         if (!isRefreshed) {
             String cache = Paper.book().read("cache");
-            if (cache != null && !cache.isEmpty() && false)  // if have cache
+            if (cache != null && !cache.isEmpty() && !cache.equals("null"))  // if have cache
             {
                 WebSite website = new Gson().fromJson(cache, WebSite.class); // Convert cache from Json to Object
                 adapter = new ListSourceAdapter(getBaseContext(), website);
@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
             else // if not have cache
             {
                 dialog.show();
+
                 //Fetch new data
                 mService.getSources().enqueue(new Callback<WebSite>() {
                     @Override
@@ -89,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
                         //Save to cache
                         Paper.book().write("cache", new Gson().toJson(response.body()));
+                        dialog.dismiss();
 
 
                     }
@@ -103,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
         } else // If from Swipe to Refresh
         {
 
-            dialog.show();
+            swipeLayout.setRefreshing(true);
             //Fetch new data
             mService.getSources().enqueue(new Callback<WebSite>() {
                 @Override
