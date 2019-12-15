@@ -28,6 +28,7 @@ public class Common {
     {
         StringBuilder apiURL = new StringBuilder("https://newsapi.org/v2/top-headlines?sources=");
         return apiURL.append(source)
+                .append("&language=fr")
                 .append("&apiKey=")
                 .append(apiKey)
                 .toString();
