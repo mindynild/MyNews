@@ -83,7 +83,7 @@ public class ListNews extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         listNews.setLayoutManager(layoutManager);
 
-        
+
 
 
 

@@ -8,7 +8,7 @@ import retrofit2.http.GET;
 import retrofit2.http.Url;
 
 public interface NewsService {
-    @GET ("v2/sources?apiKey=6bbed62e53d042cb91b21b663a178b2f")
+    @GET ("v2/sources?language=fr&apiKey=6bbed62e53d042cb91b21b663a178b2f")
     Call<WebSite> getSources() ;
 
     @GET
