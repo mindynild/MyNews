@@ -1,3 +1,3 @@
 # MyNews
-ProjetMobile
-Mobile app Newsreader for Android
+
+Mobile app Newsreader for Android - Project for an Android course at Centrale Marseille
